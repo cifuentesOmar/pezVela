@@ -2,31 +2,54 @@
 public class Pez extends Problem {
 	
 	private int[] x = new int[nVars];
-	private int[] r = new int[nVars];
 	private int[] p = new int[nVars];
+	private double lambda =0;
+	
 	
 	public Pez() {
 		for (int j = 0; j < nVars; j++) {
-			x[j] = StdRandom.uniform(2);
-			r[j] = StdRandom.uniform(2);
-			p[j] = StdRandom.uniform(2);
-		
+			x[j] = StdRandom.uniform(2);	
 		}
+	}
+	
+	protected int computeFitness() {
+		return computeFitness(x);
+	}
+
+	protected int computeFitnessPBest() {
+		return computeFitness(p);
+	}
+
+	protected boolean isBetterThanPBest() {
+		return computeFitness() < computeFitnessPBest();
+	}
+
+	protected boolean isBetterThan(Pez g) {
+		return computeFitnessPBest() < g.computeFitnessPBest();
 	}
 	
 	protected boolean isFeasible() {
 		return checkConstraint(x);
 	}
 	
-	protected boolean isBetterThan(Pez g) {
-		return computeFitness(x) < computeFitness(g.x);
-	}
-	
 	protected void copy(Object object) {
 		if (object instanceof Pez) {
 			System.arraycopy(((Pez) object).x, 0, this.x, 0, nVars);
-//			System.arraycopy(((Pez) object).f, 0, this.f, 0, nVars);
-//			System.arraycopy(((Pez) object).v, 0, this.v, 0, nVars);
+			((Pez) object).lambda = this.lambda;
+		}
+	}
+	
+	
+	protected void move(int A, double PD, double epsilon, int t) {
+		 
+		lambda = (2 * StdRandom.uniform() * PD) - PD;
+		
+		for (int j = 0; j < nVars; j++) {
+			
+			/* Actualizar velocidad */
+//			v[j] = v[j] * theta + alpha * StdRandom.uniform() * (g.p[j] - x[j]) + beta * StdRandom.uniform() * (p[j] - x[j]);
+			/* Actualizar posicion */
+//			x[j] = toBinary(x[j] + v[j]);
 		}
 	}
 	
@@ -47,5 +70,7 @@ public class Pez extends Problem {
 	private float rpd() {
 		return diff() / optimum() * 100f;
 	}
+	
+	
 
 }
