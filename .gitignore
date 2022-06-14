@@ -348,3 +348,11 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/Bat.class
+/Main.class
+/Pez.class
+/Problem.class
+/StdOut.class
+/StdRandom.class
+/Swarm.class
+/SwarmPez.class

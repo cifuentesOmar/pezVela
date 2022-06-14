@@ -20,6 +20,8 @@ public class SwarmPez {
 		
 		Pez b;
 		
+		
+		
 //		Se inicializa cada pez y se busca que sea factible
 		
 		for(int i = 1; i <= ps; i++) {
