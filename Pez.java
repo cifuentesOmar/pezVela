@@ -32,6 +32,10 @@ public class Pez extends Problem {
 		return checkConstraint(x);
 	}
 	
+	protected void updatePBest() {
+		System.arraycopy(x, 0, p, 0, x.length);
+	}
+	
 	protected void copy(Object object) {
 		if (object instanceof Pez) {
 			System.arraycopy(((Pez) object).x, 0, this.x, 0, nVars);
