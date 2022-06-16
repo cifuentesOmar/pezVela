@@ -65,7 +65,7 @@ public class SwarmPez {
 					
 					p.move(A, PD , epsilon, t);
 				} while (!p.isFeasible());
-				if (p.isBetterThan())
+				if (p.isBetterThan(g))
 					p.updatePBest();
 				swarm.get(i).copy(p);
 			}
