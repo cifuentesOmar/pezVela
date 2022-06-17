@@ -7,6 +7,7 @@ public class SwarmPez {
 	private final double epsilon = 0.01;
 	
 	
+	
 	private java.util.List<Pez> swarm = null;
 	private Pez g = null;
 	
@@ -63,9 +64,41 @@ public class SwarmPez {
 					
 					var PD = 1-(ps /(ps+250));
 					
-					p.move(A, PD , epsilon, t);
+					var lambda = (2 * StdRandom.uniform(0,1) * PD) - PD;
+					
+					p.move(A, PD , epsilon, t, g, lambda);
+					
+					double ap = A *(1-(2 * t * epsilon)); // EQ 10
+					
+//					StdOut.printf("ap=%.2f", ap);
+					
+					if(Math.abs(ap) < 0.5){						
+						
+						 int alfa = (int) (250 * ap); // ns es 250?
+						 int beta = (int) (1 * ap); // Es una dimensión di
+						 
+//						 StdOut.printf("alhpa=%d\n", alfa);
+						 
+						 
+						 var aleatorio = StdRandom.uniform(0,250);
+						 
+//						 StdOut.printf("ran=%d\n", aleatorio);
+						 
+//						 var list1 = StdRandom.uniform(250 , alfa); // set de sardinas es igual a ?
+						 
+//						 list1 = StdRandom.uniform(0, 1)*(g.x[1] - list1 + ap);
+						 
+					}else {
+						
+//						 list1 = StdRandom.uniform(0, 1)*(g.x[1] - list1 + ap);
+						
+					}
+					
+					
+					
+					
 				} while (!p.isFeasible());
-				if (p.isBetterThan(g))
+				if (p.isBetterThanPBest()) // CUAL SE OCUPA ISBETTERTHAN O isBetterThanPBest 
 					p.updatePBest();
 				swarm.get(i).copy(p);
 			}
