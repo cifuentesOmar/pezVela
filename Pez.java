@@ -1,4 +1,3 @@
-
 public class Pez extends Problem {
 
 
@@ -42,13 +41,25 @@ public class Pez extends Problem {
 	}
 	
     
+    protected void SFmoveFuera(int A,  double epsilon, int t, Pez gSF , Pez gSD, double lamda) {
+      
+        //int i_sar= (int)alplha;
+        
+        for (int j = 0; j < nVars; j++) {
+        //for (int j = 0; j < i_sar; j++) {
+
+            x[j] = toBinary(gSF.x[j] - lamda * (StdRandom.uniform(0,1) * ((gSF.x[j]+ gSD.x[j])/2)- x[j]));
+
+        }
+    }
+    
+    
     protected void SFmove(int A,  double epsilon, int t, Pez gSF , Pez gSD, double lamda, double alplha) {
       
-        int i_sar= (int) alplha;
+        //int i_sar= (int)alplha;
         
-        //for (int j = 0; j < nVars; j++) {
-        for (int j = 0; j < i_sar; j++) {
-
+        for (int j = 0; j < nVars; j++) {
+        //for (int j = 0; j < i_sar; j++) {
 
             x[j] = toBinary(gSF.x[j] - lamda * (StdRandom.uniform(0,1) * ((gSF.x[j]+ gSD.x[j])/2)- x[j]));
 
@@ -57,9 +68,24 @@ public class Pez extends Problem {
     
     protected void SDmove(int A,  double epsilon, int t, Pez gSF , Pez gSD, double lamda, double ataque) {
 
+        
+        
         for (int j = 0; j < nVars; j++) {
          
-             x[j] =  toBinary(StdRandom.uniform(0,1) * (gSF.x[j] -  gSD.x[j] + ataque));
+             x[j] =  toBinary(StdRandom.uniform(0,1) * (gSF.x[j]-  gSD.x[j] + ataque));
+
+        }
+    }
+    
+    
+    protected void SDmoveAlpha(int A,  double epsilon, int t, Pez gSF , Pez gSD, double lamda, double ataque, double alpha) {
+
+       int i_sar= (int)alpha;
+
+        for (int j = 0; j < i_sar; j++) {
+        //for (int j = 0; j < nVars; j++) {
+         
+             x[j] =  toBinary(StdRandom.uniform(0,1) * (gSF.x[j]-  gSD.x[j] + ataque));
 
         }
     }
