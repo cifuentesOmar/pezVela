@@ -2,8 +2,8 @@
 public class SwarmPez {
 
     //variables
-    private final int pSF = 100; //20
-    private final int pSD = 400; //30
+    private final int pSF = 20; //20
+    private final int pSD = 30; //30
     private final int T = 1000;
     private final int A = 4;
     private final double epsilon = 0.01;
@@ -65,28 +65,45 @@ public class SwarmPez {
 
         int t = 1;
         while (t <= T) {
+            
             lamda = 2 * StdRandom.uniform() * PD - PD;
             Pez p = new Pez();
-            double ataque = A * (1 - (2 * t * epsilon)); // EQ 10 ataque
+        
+            //actualización de pez espada
+            
+            
+            int iFuera = 0;
+            while (iFuera < pSF) {
+            
+            do {
+                        //p.SFmove(A, epsilon, t, gSF, gSD, lamda);
+                        p.SFmoveFuera(A, epsilon, t, gSF, gSD, lamda);
+                        p.copy(swarmSF.get(iFuera));
 
+                    } while (!p.isFeasible());
+                    if (swarmSF.get(iFuera).isBetterThan(gSF)) {
+                        gSF.copy(swarmSF.get(iFuera));
+                    }
+             iFuera++;
+            }
+            
+            double ataque = A * (1 - (2 * t * epsilon)); // EQ 10 ataque
             if (ataque < 0.5) {
                 
                 double alpha=pSD*ataque;
                 double betha=1*ataque;
                 
                 int i = 0;
-                while (i < pSF) { //puede ser for igual ya tengo la restricción
+                while (i < pSD) { //puede ser for igual ya tengo la restricción
                     
-                           //ver donde va esta variable. 
                     do {
-
                         //p.SFmove(A, epsilon, t, gSF, gSD, lamda);
-                        p.SFmove(A, epsilon, t, gSF, gSD, lamda, alpha);
-                        p.copy(swarmSF.get(i));
+                        p.SDmoveAlpha(A, epsilon, t, gSF, gSD, lamda, ataque, alpha);
+                        p.copy(swarmSD.get(i));
 
                     } while (!p.isFeasible());
-                    if (swarmSF.get(i).isBetterThan(gSF)) {
-                        gSF.copy(swarmSF.get(i));
+                    if (swarmSD.get(i).isBetterThan(gSF)) { //LO QUE ESTA EN SARDINA ES MEJOR QUE LO QUE ESTA EN PEZ VELA
+                        gSF.copy(swarmSD.get(i)); //COPIAR LO DE SARDINA A PEZ VELA (EL MEJOR)
                     }
                     i++;
                 }

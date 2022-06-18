@@ -44,7 +44,7 @@ public class Pez extends Problem {
     
     protected void SFmove(int A,  double epsilon, int t, Pez gSF , Pez gSD, double lamda, double alplha) {
       
-        int i_sar= (int)alplha;
+        int i_sar= (int) alplha;
         
         //for (int j = 0; j < nVars; j++) {
         for (int j = 0; j < i_sar; j++) {
@@ -59,7 +59,7 @@ public class Pez extends Problem {
 
         for (int j = 0; j < nVars; j++) {
          
-             x[j] =  toBinary(StdRandom.uniform(0,1) * (gSF.x[j]-  gSD.x[j] + ataque));
+             x[j] =  toBinary(StdRandom.uniform(0,1) * (gSF.x[j] -  gSD.x[j] + ataque));
 
         }
     }
