@@ -40,6 +40,7 @@ public class Swarm {
         int t = 1;
         Bat b = new Bat();
         while (t <= T) {
+        	
             for (int i = 0; i < ps; i++) {
                 if (swarm.get(i).hasExploration()) {
                     do {

@@ -1,3 +1,5 @@
+
+
 /******************************************************************************
  *  Compilation:  javac StdOut.java
  *  Execution:    java StdOut
@@ -21,7 +23,7 @@ import java.util.Locale;
  *  Otherwise, either download
  *  <a href = "https://introcs.cs.princeton.edu/java/code/stdlib.jar">stdlib.jar</a>
  *  and add to your Java classpath or download
- *  <a href = "https://introcs.cs.princeton.edu/java/stdlib/StdOut.java">StdOut.java</a>
+ *  <a href = "https://introcs.cs.princetonz.edu/java/stdlib/StdOut.java">StdOut.java</a>
  *  and put a copy in your working directory.
  *  <p>
  *  Here is an example program that uses {@code StdOut}:
