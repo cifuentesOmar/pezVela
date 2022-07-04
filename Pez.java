@@ -1,12 +1,13 @@
 
 public class Pez extends Problem {
 
-
-
+	
     //VARIABLES DEL PROBLEMA
-    private int[] x = new int[nVars];
+    
+	private int[] x = new int[nVars];
     private int[] p = new int[nVars];
    
+    // INICIALIZACIÓN DE PEZ
 
     public Pez() {
         for (int j = 0; j < nVars; j++) {
@@ -28,11 +29,11 @@ public class Pez extends Problem {
     }
 
     protected boolean isBetterThanPBest() {
-        return computeFitness() < computeFitnessPBest(); //
+        return computeFitness() < computeFitnessPBest();
     }
 
     protected boolean isBetterThan(Pez g) {
-        return computeFitness(x) < computeFitness(g.x); //compara solucion que tiene x y la va comparar con la de g
+        return computeFitness(x) < computeFitness(g.x);
     }
 
     
@@ -40,22 +41,15 @@ public class Pez extends Problem {
 		return StdRandom.uniform() <= (1 / (1 + Math.pow(Math.E, -x))) ? 1 : 0;
 	}
 	
+    // MOVIMIENTO DE PEZ VELA
     
-    protected void SFmoveFuera(int A,  double epsilon, int t, Pez gSF , Pez gSD, double lamda) {
-      
+    protected void SFmoveFuera(int A,  double epsilon, int t, Pez gSF , Pez gSD, double lamda) {      
         for (int j = 0; j < nVars; j++) {
-            x[j] = toBinary(gSF.x[j] - lamda * (StdRandom.uniform(0,1) * ((gSF.x[j]+ gSD.x[j])/2)- x[j]));
+            x[j] = toBinary(gSF.x[j] - lamda * (StdRandom.uniform(0,1) * ((gSF.x[j]+ gSD.x[j])/2)- x[j])); // EQ(6)
         }
     }
     
-    
-    protected void SFmove(int A,  double epsilon, int t, Pez gSF , Pez gSD, double lamda, double alplha) {
-              
-        for (int j = 0; j < nVars; j++) {
-              x[j] = toBinary(gSF.x[j] - lamda * (StdRandom.uniform(0,1) * ((gSF.x[j]+ gSD.x[j])/2)- x[j]));
-
-        }
-    }
+    // MOVIMIENTO DE PEZ SARDINA
     
     protected void SDmove(int A,  double epsilon, int t, Pez gSF , Pez gSD, double lamda, double ataque) {        
         
@@ -64,6 +58,7 @@ public class Pez extends Problem {
         }
     }
     
+    // MOVIMIENTO DE PEZ SARDINA CON ALFA Y BETA
     
     protected void SDmoveAlpha(int A,  double epsilon, int t, Pez gSF , Pez gSD, double lamda, Pez s, double ataque) {
         
